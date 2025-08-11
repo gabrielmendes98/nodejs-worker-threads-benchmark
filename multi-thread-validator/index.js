@@ -1,6 +1,9 @@
 import fs from "fs";
 import os from "os";
+import path from "path";
 import { Worker } from "worker_threads";
+
+const __dirname = import.meta.dirname;
 
 const NUM_WORKERS = os.cpus().length;
 const BATCH_SIZE = 1000;
@@ -20,7 +23,7 @@ async function validateTransfers() {
 
   return new Promise((resolve, reject) => {
     function createWorker() {
-      const worker = new Worker("./worker.mjs");
+      const worker = new Worker(path.join(__dirname, "worker.js"));
       allWorkers.push(worker);
       availableWorkers.push(worker);
 

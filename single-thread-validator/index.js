@@ -1,5 +1,5 @@
 import fs from "fs";
-import { validateAccount, validateAgency, validateDocument, validateValue } from "./validations.mjs";
+import { validateAccount, validateAgency, validateDocument, validateValue } from "../utils/validations.js";
 
 function validateLines(lines, firstLine) {
   const errorMessages = [];

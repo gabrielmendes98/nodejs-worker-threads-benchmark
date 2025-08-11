@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-worker-threads-benchmark",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "generate": "node ./file-generator/optimized.js",
+    "generate:unoptimized": "node ./file-generator/unoptimized.js",
+    "validate:multi": "node ./multi-thread-validator/index.js",
+    "validate:single": "node ./single-thread-validator/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

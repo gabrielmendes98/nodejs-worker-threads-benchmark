@@ -1,6 +1,6 @@
 // MAX MEMORY USAGE DURING TESTS: 24MB
 import fs from "fs";
-import { generateFakeNumber, generateFakeSalary } from "./fake.mjs";
+import { generateFakeNumber, generateFakeSalary } from "../utils/fake.js";
 
 const NUMBER_OF_REGISTERS = 1000000;
 
