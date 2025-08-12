@@ -14,7 +14,7 @@ async function createFakeTransfersFile() {
   logMemoryUsage("Início da createFakeTransfersFile");
 
   const headers = ["document", "agency", "account", "value"];
-  const writable = fs.createWriteStream("../transfers.csv");
+  const writable = fs.createWriteStream("transfers.csv");
   writable.write(headers.join(",") + "\n");
 
   let i = 0;
