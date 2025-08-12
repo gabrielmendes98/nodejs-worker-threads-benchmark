@@ -3,13 +3,15 @@ import fs from "fs";
 import { generateFakeNumber, generateFakeSalary } from "../utils/fake.js";
 
 const NUMBER_OF_REGISTERS = process.argv[2] || 1000000;
+const ENABLE_LOGS = process.argv[3] === "true";
 
 function logMemoryUsage(label) {
-  const mem = process.memoryUsage();
-  // heapUsed é a memória usada pelo JavaScript (pilha e heap)
-  // console.log(`[${label}] Memory used: ${(mem.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+  if (ENABLE_LOGS) {
+    const mem = process.memoryUsage();
+    // heapUsed é a memória usada pelo JavaScript (pilha e heap)
+    console.log(`[${label}] Memory used: ${(mem.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+  }
 }
-
 async function createFakeTransfersFile() {
   logMemoryUsage("Inicio createFakeTransfersFile");
 
