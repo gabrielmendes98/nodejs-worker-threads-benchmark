@@ -1,4 +1,4 @@
-##
+## Tests in MacBook with 11 cores
 
 |                      | Single Thread | Multi Thread |
 | :------------------- | :-----------: | :----------: |
