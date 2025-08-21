@@ -68,10 +68,10 @@ async function validateTransfers() {
 }
 
 async function main() {
-  console.time();
+  console.time("Total time");
   const errorMessages = await validateTransfers();
-  console.log("errors:", errorMessages);
-  console.timeEnd();
+  console.log("Errors found:", errorMessages);
+  console.timeEnd("Total time");
 }
 
 main();

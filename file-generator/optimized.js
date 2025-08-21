@@ -7,13 +7,12 @@ const ENABLE_LOGS = process.argv[3] === "true";
 function logMemoryUsage(label) {
   if (ENABLE_LOGS) {
     const mem = process.memoryUsage();
-    // heapUsed é a memória usada pelo JavaScript (pilha e heap)
     console.log(`[${label}] Memory used: ${(mem.heapUsed / 1024 / 1024).toFixed(2)} MB`);
   }
 }
 
 async function createFakeTransfersFile() {
-  logMemoryUsage("Início da createFakeTransfersFile");
+  logMemoryUsage("Init createFakeTransfersFile");
 
   const headers = ["document", "agency", "account", "value"];
   const writable = fs.createWriteStream("transfers.csv");
@@ -41,7 +40,7 @@ async function createFakeTransfersFile() {
     }
 
     if (i < NUMBER_OF_REGISTERS) {
-      logMemoryUsage(`Buffer cheio no registro #${i}`);
+      logMemoryUsage(`Buffer full in record #${i}`);
       writable.once("drain", write);
     }
   }
@@ -50,16 +49,16 @@ async function createFakeTransfersFile() {
 
   return new Promise((resolve) => {
     writable.on("finish", () => {
-      logMemoryUsage(`Buffer cheio no registro #${i}`);
+      logMemoryUsage("Finish createFakeTransfersFile");
       resolve();
     });
   });
 }
 
 async function main() {
-  logMemoryUsage("Inicio da main");
+  logMemoryUsage("Init main");
   await createFakeTransfersFile();
-  logMemoryUsage("Fim da main");
+  logMemoryUsage("Finish main");
 }
 
 main();

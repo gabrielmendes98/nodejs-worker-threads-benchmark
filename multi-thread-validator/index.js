@@ -8,9 +8,7 @@ const __dirname = import.meta.dirname;
 const NUM_WORKERS = os.cpus().length;
 const BATCH_SIZE = 1000;
 
-// 'allWorkers' mantém a referência a todas as threads, para encerramento
 const allWorkers = [];
-// 'availableWorkers' gerencia quais workers podem receber novas tarefas
 const availableWorkers = [];
 const taskQueue = [];
 
@@ -31,12 +29,10 @@ async function validateTransfers() {
         allErrors.push(...errors);
         tasksCompleted++;
 
-        // Se houver mais tarefas na fila, distribua para este worker
         if (taskQueue.length > 0) {
           const task = taskQueue.shift();
           worker.postMessage(task);
         } else {
-          // Caso contrário, adicione o worker de volta ao pool de disponíveis
           availableWorkers.push(worker);
         }
 
@@ -77,12 +73,10 @@ async function validateTransfers() {
             tasksSent++;
             const task = { lines: batch, firstLine: currentLineNumber };
 
-            // Se houver workers disponíveis, use um
             if (availableWorkers.length > 0) {
               const worker = availableWorkers.shift();
               worker.postMessage(task);
             } else {
-              // Se não houver, coloque a tarefa na fila
               taskQueue.push(task);
             }
             currentLineNumber += batch.length;
@@ -118,16 +112,15 @@ async function validateTransfers() {
 
     readable.on("error", reject);
   }).finally(() => {
-    // Agora o loop é sobre 'allWorkers', que sempre terá todos eles
     allWorkers.forEach((worker) => worker.terminate());
   });
 }
 
 async function main() {
-  console.time("Tempo total");
+  console.time("Total time");
   const errorMessages = await validateTransfers();
-  console.log("Erros encontrados:", errorMessages);
-  console.timeEnd("Tempo total");
+  console.log("Errors found:", errorMessages);
+  console.timeEnd("Total time");
 }
 
 main();
