@@ -1,4 +1,3 @@
-// MAX MEMORY USAGE DURING TESTS: 24MB
 import fs from "fs";
 import { generateFakeNumber, generateFakeSalary } from "../utils/fake.js";
 
